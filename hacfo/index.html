@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="0;URL=/">
+        <script type="text/javascript">
+            function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+              results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            var appendee = {};
+
+            // GA: utm_source
+            var utm_source = getParameterByName('utm_source');
+            if (utm_source != null && utm_source != undefined && utm_source != '') {
+              appendee.utm_source = utm_source;
+            }
+
+            var destination = "/";
+            var keys = Object.keys(appendee);
+            if (keys.length > 0) {
+              destination = destination + (keys.length > 0 ? '?' : '');
+              keys.forEach(function (key) {
+                destination = destination + "&" + key + "=" + appendee[key];
+              });
+
+              window.location.href = destination;
+            }
+        </script>
+        <title>HACFO</title>
+    </head>
+    <body>
+    </body>
+</html>
